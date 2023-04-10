@@ -83,13 +83,13 @@
         }
         .contact-con {
             display: grid;
-            padding: 2px;
             padding-top:5px;
             padding-bottom:5px;
             justify-content: space-evenly;
+            align-items:center;
             background-color: #fcfcfc81;
+            width: 50px;
             /* #abaaaa; */
-            width: 40px;
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 2px;
             border-top-left-radius: 20px;
@@ -97,6 +97,9 @@
        }
        .contact-con img {
             margin: 10px;
+       }
+       .contact-con img:hover { 
+            filter: invert(1);
        }
         .hero {
             position: relative;
@@ -169,6 +172,19 @@
         
        
     </style>
+    <defs>
+        <filter id="trans-shadow">
+        <feColorMatrix type="matrix" values="1 0 0 0 0 
+                                             0 1 0 0 0 
+                                             0 0 1 0 0 
+                                             0 0 0 100 0"
+                                             result="boostedInput"/>
+                                             
+        <feGaussianBlur stdDeviation="5"/>
+        <feComposite operator="out" in2="boostedInput"/>
+        </filter>
+      </defs>
+
     <div class="wrapper">
        <div class="header">
         <div class="title">
@@ -278,12 +294,12 @@ body {
 } */
 .greeting {
   margin:50px;
+  margin-top: 10PX;
   color: #e5e5e5;
-  font-size: 30px;
+  font-size: 20px;
   font-family: 'Courier New', Courier, monospace;
-
 }
-
+.first, .second, .third {font-size: 50px;}
 .animation {
   height:50px;
   overflow:hidden;
@@ -330,8 +346,11 @@ body {
 @media(max-width:640px) {
     .greeting {
         font-size: 20px;
-        margin:20px
+        margin:10px;
+        margin-left: 20px;
+        white-space: nowrap;
     }
+    .first, .second, .third {font-size: 30px;}
 }
 </style>
 <script>
