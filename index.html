@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Varela Round' rel='stylesheet'>
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
     <title>Document</title>
 </head>
 <body>
@@ -22,10 +26,12 @@
         .wrapper {
             position: relative;
             width: 100%;
-            height: 2000px;
+            height: 1070px;
             background-color: rgb(0, 0, 0);
         }
         .header {
+            animation: tada;
+            animation-duration: 2s;
             display: flex;
             justify-content: space-between;
             position: fixed;
@@ -39,8 +45,12 @@
             border-bottom:0px solid rgb(0, 0, 0);
             background: -webkit-gradient(linear, left bottom, left top, color-stop(-40%,rgba(0, 0, 0, 0)), color-stop(40%,rgb(0, 0, 0))); /* Chrome,Safari4+ */
             z-index: 3;
+            animation-duration: 2s;
+            animation: fadeIn;
+            animation-duration: 1s;
         }
         .header .i {
+            
             font-weight: 600;
             font-size: 25px;
         }
@@ -80,6 +90,8 @@
             float: right;
             z-index: 4;
             margin-top: 150px;
+            animation: backInRight;
+            animation-duration: 1s;
         }
         .contact-con {
             display: grid;
@@ -97,18 +109,23 @@
        }
        .contact-con img {
             margin: 10px;
+            transition: 0.4s;
+            
        }
        .contact-con img:hover { 
-            filter: invert(1);
+            animation: bounceIn;
+            animation-duration: 1s;
        }
         .hero {
             position: relative;
             z-index: 1;
             color: rgb(255, 255, 255);
             height: 200px;
-            padding-top: 200px;
+            padding-top: 170px;
         }
         .hero-img {
+            animation: pulse;
+            animation-duration: 2s;
             position: absolute;
             background-image: url(assets/black-leave.jpg);
             background-size: cover;
@@ -121,6 +138,7 @@
         .works {
             font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
             font-size: 30px;
+            
         }
         .works .protxt {
             position: relative;
@@ -141,6 +159,8 @@
             border-radius:5px;
             padding:10px;
             margin:20px;
+            animation:fadeInLeft;
+            animation-duration:2s;
         }
 
         .contents .image-wrap {
@@ -169,8 +189,6 @@
             height: 100px;
             background-color: black;
         }
-        
-       
     </style>
     <defs>
         <filter id="trans-shadow">
@@ -298,10 +316,14 @@ body {
   color: #e5e5e5;
   font-size: 20px;
   font-family: 'Courier New', Courier, monospace;
+  animation: flipInX;
+ animation-duration: 1s;
 }
-.first, .second, .third {font-size: 50px;}
+.first, .second, .third {
+    font-size: 50px;
+}
 .animation {
-  height:50px;
+  height:55px;
   overflow:hidden;
   margin-left: 1rem;
 }
@@ -344,6 +366,7 @@ body {
   100% {margin-top: 0;}
 }
 @media(max-width:640px) {
+    .hero {padding-top: 200px;}
     .greeting {
         font-size: 20px;
         margin:10px;
