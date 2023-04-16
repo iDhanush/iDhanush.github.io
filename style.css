@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    color: rgb(255, 255, 255);
     z-index: 2;
 }
 
@@ -23,10 +22,8 @@ body {
 }
 
 .wrapper {
-    overflow-x: hidden;
-
+    height: 100%;
     position: relative;
-    width: 100%;
     background-color: rgb(0, 0, 0);
     animation: fadeIn;
     animation-duration: 0.5s;
@@ -100,27 +97,26 @@ body {
 /* position: static; margin-top: 220px; top: 0px; right: 0px; */
 /* position: fixed; margin-top: 30px; top: 0px; right: 0px; */
 .con-con {
-    position: relative;
-    float: right;
-    margin-top: 170px;
+    margin-top: -50px;
     animation: backInRight;
-    animation-duration: 1s;
+    animation-duration: 2s;
     z-index: 4;
 }
 
 .contact-con {
     display: grid;
-    padding: 3px;
-    padding-right: 3px;
+    padding: 1px;
+    padding-right: 4px;
     padding-top: 4px;
     padding-bottom: 3px;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     background-color: #fcfcfca2;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 8px;
     border-top-left-radius: 30px;
     border-top-right-radius: 30px;
+    max-width: 40px;
 }
 
 .contact-con img {
@@ -136,20 +132,26 @@ body {
 }
 
 .hero {
-    position: relative;
+    display: flex;
+    justify-content: space-between;
     z-index: 0;
     color: rgb(255, 255, 255);
     height: 200px;
     padding-top: 170px;
 }
 
-.hero-img {
+.background-wrapper {
+    overflow: hidden;
+    width: 100%;
+}
+
+.background-img {
     animation: pulse;
     animation-duration: 2s;
     position: absolute;
     background-image: url(assets/black-leave-cropped.jpg);
     background-size: cover;
-    background-position: center;
+    background-position: 50% 50%;
     float: right;
     right: 0;
     opacity: 1;
@@ -182,7 +184,6 @@ body {
     overflow: scroll;
     background-color: transparent;
     font-family: 'Courier New', Courier, monospace;
-    margin: 20px;
     display: flex;
     animation: fadeInLeft;
     animation-duration: 1.5s;
@@ -199,7 +200,6 @@ body {
 
 .contents .title {
     color: #fcfcfcf3;
-    padding: 0px;
     display: flex;
     justify-content: space-between;
     word-spacing: -11px;
@@ -238,6 +238,7 @@ body {
     padding: 10px;
     width: 300px;
     color: #ffffffa1;
+
 }
 
 .footer {
@@ -348,6 +349,41 @@ body {
     }
 }
 
+.contact-head {
+    display: flex;
+    justify-content: space-evenly;
+    color: rgb(179, 177, 177);
+    padding: 50px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.contact-question {
+    font-size: 20px;
+    padding: 10px;
+    width: 40%;
+}
+
+.contact-form {
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    background-color: transparent;
+    padding-left: 200px;
+    padding-right: 200px;
+    width: 350px;
+    width: 60%;
+}
+
+.contact-form input,
+.contact-form button {
+    margin: 10px;
+    color: white;
+    background-color: #000000;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+
 /* responsive tweaks */
 
 @media(max-width:640px) {
@@ -355,7 +391,7 @@ body {
         padding-top: 200px;
     }
 
-    .hero-img {
+    .background-img {
         margin-top: -100px;
         margin-right: -50px;
         width: 96%;
@@ -378,11 +414,13 @@ body {
         flex-direction: column;
         animation: fadeInUp;
         animation-duration: 1s;
+        padding: 5px;
     }
 
     .contents .content {
         width: 100%;
         height: 100%;
+        padding: 10px;
     }
 }
 
@@ -396,7 +434,7 @@ body {
         font-size: 20px;
     }
 
-    .hero-img {
+    .background-img {
         width: 120%;
         height: 10%;
     }
