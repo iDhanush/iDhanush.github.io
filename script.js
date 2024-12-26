@@ -44,7 +44,7 @@ var myWorks = [
     },
     {
         title: "LinkTools.in",
-        content: "LinkTools: A versatile web application that simplifies URL management with features like link shortening, custom aliases, QR code generation, and analytics to track link performance. Perfect for personal and business use!",
+        content: "A web app for managing URLs with features like link shortening, custom aliases, QR code generation, analytics, and locked links with a paywall. Ideal for personal and business use!",
         source: "https://linktools.pages.dev/"
     },
     
