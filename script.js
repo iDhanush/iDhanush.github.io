@@ -33,7 +33,7 @@ var myWorks = [
         source: "https://www.linkedin.com/posts/idhanush_placements-backenddeveloper-techforgood-activity-7277985605483905027-lKnB?utm_source=share&utm_medium=member_desktop"
     },
     {
-        title: "Animatronics Robot V1",
+        title: "IoT Robo V1",
         content: "An IoT-enabled animatronic greeting robot funded by IEDC SJC Devagiri, designed to interact with users through greetings and dynamic facial expressions.",
         source: "https://github.com/iDhanush/IoT_Animatronics_Robot_V1.git"
     },
