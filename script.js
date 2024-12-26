@@ -34,7 +34,7 @@ var myWorks = [
     },
     {
         title: "IoT Animatronics Robot V1",
-        content: "An IoT-enabled Animatronic Greeting Robot Funded by the IEDC of SJC Devagiri. The robot is designed to interact dynamically with users, creating an engaging experience by greeting, animating expressions, and allowing interaction through its body screen.",
+        content: "An IoT-enabled Animatronic Greeting Robot Funded by the IEDC of SJC Devagiri. The robot is designed to interact dynamically with users, creating an engaging experience by greeting, animating expressions",
         source: "https://github.com/iDhanush/IoT_Animatronics_Robot_V1.git"
     },
     {
