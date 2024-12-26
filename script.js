@@ -34,12 +34,12 @@ var myWorks = [
     },
     {
         title: "IoT Animatronics Robot V1",
-        content: "An IoT-enabled Animatronic Greeting Robot Funded by the IEDC of SJC Devagiri. The robot is designed to interact dynamically with users, creating an engaging experience by greeting, animating expressions",
+        content: "An IoT-enabled animatronic greeting robot funded by IEDC SJC Devagiri, designed to interact with users through greetings and dynamic facial expressions.",
         source: "https://github.com/iDhanush/IoT_Animatronics_Robot_V1.git"
     },
     {
         title: "BGM4RealLife",
-        content: "A fun personal project designed to add background music to real-life scenarios, enhancing everyday moments with a touch of cinematic flair. Created as part of a \"useless projects\" initiative, it was recognized among the top 10 projects for its creativity and fun concept.",
+        content: "A fun project that adds cinematic background music to everyday moments and was featured in the top 10 \"Useless Projects\" for its creativity.",
         source: "https://bgm4reallife.vercel.app/"
     },
     {
