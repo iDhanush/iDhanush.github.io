@@ -204,11 +204,16 @@ body {
     display: flex;
     justify-content: space-between;
     word-spacing: -11px;
+    padding-left: 2px;
 }
 
 .contents .title .readmore {
-    width: 30px;
+    width: 40px;
     filter: invert(0.5);
+}
+
+.contents .title .icon {
+    width: 30px;
 }
 
 .contents .image-wrap {
