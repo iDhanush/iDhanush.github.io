@@ -33,9 +33,9 @@ var myWorks = [
         source: "https://play.google.com/store/apps/details?id=com.evolvates.placifysjc"
     },
     {
-        title: "IoT Animatronics Robot",
+        title: "IoT Animatronics Robot V1",
         content: "An IoT-enabled Animatronic Greeting Robot Funded by the IEDC of SJC Devagiri. The robot is designed to interact dynamically with users, creating an engaging experience by greeting, animating expressions, and allowing interaction through its body screen.",
-        source: "https://github.com/iDhanush/IEDC-robot.git"
+        source: "https://github.com/iDhanush/IoT_Animatronics_Robot_V1.git"
     },
     {
         title: "WEB Scraping Tool",
