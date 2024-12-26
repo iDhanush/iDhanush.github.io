@@ -28,14 +28,14 @@ svgList = {
 
 var myWorks = [
     {
-        title: "News REST API",
-        content: "Lorem Ipsum is simply and scrambled it unchanged. in the 1960s with the release of Lorem Ipsum passages, and more recently with desktop publis",
-        source: "https://google.com"
+        title: "Placify App",
+        content: "A mobile app designed to simplify college placements, providing personalized feeds, real-time job notifications, and updates to enhance the placement process for students.",
+        source: "https://play.google.com/store/apps/details?id=com.evolvates.placifysjc"
     },
     {
-        title: "Cors Bypass",
-        content: "Lorem Ipsum is simply and scrambled it unchanged. in the 1960s with the release of Lorem Ipsum passages, and more recently with desktop publis",
-        source: "https://google.com"
+        title: "IoT Animatronics Robot",
+        content: "An IoT-enabled Animatronic Greeting Robot Funded by the IEDC of SJC Devagiri. The robot is designed to interact dynamically with users, creating an engaging experience by greeting, animating expressions, and allowing interaction through its body screen.",
+        source: "https://github.com/iDhanush/IEDC-robot.git"
     },
     {
         title: "WEB Scraping Tool",
