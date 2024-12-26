@@ -30,7 +30,7 @@ var myWorks = [
     {
         title: "Placify App",
         content: "A mobile app designed to simplify college placements, providing personalized feeds, real-time job notifications, and updates to enhance the placement process for students.",
-        source: "https://play.google.com/store/apps/details?id=com.evolvates.placifysjc"
+        source: "https://www.linkedin.com/posts/idhanush_placements-backenddeveloper-techforgood-activity-7277985605483905027-lKnB?utm_source=share&utm_medium=member_desktop"
     },
     {
         title: "IoT Animatronics Robot V1",
