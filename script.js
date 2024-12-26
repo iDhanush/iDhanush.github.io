@@ -38,15 +38,16 @@ var myWorks = [
         source: "https://github.com/iDhanush/IoT_Animatronics_Robot_V1.git"
     },
     {
+        title: "BGM4RealLife",
+        content: "A fun personal project designed to add background music to real-life scenarios, enhancing everyday moments with a touch of cinematic flair. Created as part of a \"useless projects\" initiative, it was recognized among the top 10 projects for its creativity and fun concept.",
+        source: "https://bgm4reallife.vercel.app/"
+    },
+    {
         title: "LinkTools.in",
         content: "LinkTools: A versatile web application that simplifies URL management with features like link shortening, custom aliases, QR code generation, and analytics to track link performance. Perfect for personal and business use!",
         source: "https://linktools.pages.dev/"
     },
-    {
-        title: "ReScrApi",
-        content: "Lorem Ipsum is simply and scrambled it unchanged. in the 1960s with the release of Lorem Ipsum passages, and more recently with desktop publis",
-        source: "https://google.com"
-    }
+    
 ]
 
 function createDiv(className) {
