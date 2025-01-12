@@ -92,7 +92,24 @@
             justify-content: flex-end;
         }
 
-        /* Popup styles */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
         .popup {
             position: fixed;
             top: 50%;
@@ -104,25 +121,41 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
             text-align: center;
             z-index: 1000;
-            visibility: hidden; /* Hide popup by default */
-            opacity: 0; /* Make it invisible */
-            transition: visibility 0s linear 0.3s, opacity 0.3s ease; /* Add transition */
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
         }
 
         .popup.show {
-            visibility: visible; /* Show when .show class is added */
+            transform: translate(-50%, -50%) scale(1);
             opacity: 1;
-            animation: popIn 0.3s ease forwards;
-            transition-delay: 0s; /* Remove delay when showing */
+            visibility: visible;
         }
 
         .popup-content {
             font-size: 1.5rem;
-            color: #dc3545;
             margin-bottom: 1.5rem;
         }
 
-        .popup-btn {
+        .popup-content.success {
+            color: #28a745;
+        }
+
+        .popup-content.error {
+            color: #dc3545;
+        }
+
+        .popup-btn.success {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .popup-btn.error {
             background-color: #dc3545;
             color: white;
             border: none;
@@ -130,31 +163,19 @@
             border-radius: 6px;
             cursor: pointer;
             font-size: 1rem;
-            transition: background-color 0.3s ease;
         }
 
-        .popup-btn:hover {
+        .popup-btn.success:hover {
+            background-color: #218838;
+        }
+
+        .popup-btn.error:hover {
             background-color: #c82333;
         }
 
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            visibility: hidden; /* Hide overlay by default */
+        .quiz-container.dimmed {
             pointer-events: none;
-            transition: visibility 0s linear 0.3s, opacity 0.3s ease;
-        }
-
-        .overlay.show {
-            opacity: 1;
-            visibility: visible; /* Show when .show class is added */
-            pointer-events: auto;
-            transition-delay: 0s; /* Remove delay when showing */
+            opacity: 0.7;
         }
 
         @keyframes popIn {
@@ -174,7 +195,7 @@
     <div class="overlay"></div>
     <div class="popup">
         <div class="popup-content">
-            <p>❌ Incorrect Answer!</p>
+            <p class="message"></p>
         </div>
         <button class="popup-btn">Next Question</button>
     </div>
@@ -189,7 +210,6 @@
     </div>
 
     <script>
-        // Sample quiz data
         const quizData = [
     {
         qn: "Which of these are programming languages commonly used for web development?",
@@ -364,6 +384,7 @@
 ];
 
         let currentQuestion = 0;
+        let selectedAnswers = new Set();
         const quizContainer = document.querySelector('.quiz-container');
         const questionElement = document.querySelector('.question');
         const optionsGrid = document.querySelector('.options-grid');
@@ -371,7 +392,7 @@
         const progressElement = document.querySelector('.progress');
         const popup = document.querySelector('.popup');
         const overlay = document.querySelector('.overlay');
-        const popupBtn = document.querySelector('.popup-btn');
+        const popupBtn = popup.querySelector('.popup-btn');
 
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -381,21 +402,38 @@
             return array;
         }
 
-        function showPopup() {
+        function showPopup(type, message) {
+            const popupContent = popup.querySelector('.popup-content');
+            const popupBtn = popup.querySelector('.popup-btn');
+            
+            // Reset classes
+            popupContent.classList.remove('error', 'success');
+            popupBtn.classList.remove('error', 'success');
+            
+            // Add new classes
+            popupContent.classList.add(type);
+            popupBtn.classList.add(type);
+            
+            // Set message
+            popup.querySelector('.message').textContent = message;
+            
+            // Show popup and overlay
             popup.classList.add('show');
             overlay.classList.add('show');
+            quizContainer.classList.add('dimmed');
         }
 
         function hidePopup() {
             popup.classList.remove('show');
             overlay.classList.remove('show');
+            quizContainer.classList.remove('dimmed');
         }
 
-        function nextQuestion() {
-            hidePopup();
-            currentQuestion++;
-            displayQuestion();
-            window.scrollTo(0, 0);
+        function checkAllCorrectAnswers() {
+            const question = quizData[currentQuestion];
+            const selectedCorrectAnswers = Array.from(selectedAnswers)
+                .filter(answer => question.correct.includes(answer));
+            return selectedCorrectAnswers.length === question.correct.length;
         }
 
         function displayQuestion() {
@@ -404,6 +442,7 @@
                 return;
             }
 
+            selectedAnswers.clear();
             const question = quizData[currentQuestion];
             questionElement.textContent = question.qn;
             
@@ -411,7 +450,6 @@
             const shuffledOptions = shuffleArray([...allOptions]);
 
             progressElement.textContent = `Question ${currentQuestion + 1} of ${quizData.length}`;
-
             optionsGrid.innerHTML = '';
 
             shuffledOptions.forEach(option => {
@@ -422,14 +460,26 @@
                 optionElement.addEventListener('click', () => {
                     if (question.correct.includes(option)) {
                         optionElement.classList.add('correct');
+                        selectedAnswers.add(option);
+                        
+                        if (checkAllCorrectAnswers()) {
+                            showPopup('success', '🎉 Well Done! All answers are correct!');
+                        }
                     } else {
                         optionElement.classList.add('incorrect');
-                        showPopup();
+                        showPopup('error', '❌ Incorrect Answer!');
                     }
                 });
 
                 optionsGrid.appendChild(optionElement);
             });
+        }
+
+        function nextQuestion() {
+            hidePopup();
+            currentQuestion++;
+            displayQuestion();
+            window.scrollTo(0, 0);
         }
 
         nextButton.addEventListener('click', nextQuestion);
