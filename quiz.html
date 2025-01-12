@@ -104,18 +104,178 @@
 
     <script>
         // Sample quiz data
-        const quizData = [
-            {
-                qn: "What is the capital of France?",
-                wrong: ["London", "Berlin", "Madrid", "Rome", "Amsterdam"],
-                correct: ["Paris"]
-            },
-            {
-                qn: "Which programming languages are statically typed?",
-                wrong: ["Python", "JavaScript", "Ruby", "PHP", "Perl"],
-                correct: ["Java", "C++", "TypeScript", "Go", "Rust"]
-            }
-        ];
+        const quizData =const quizData = [
+    {
+        qn: "Which of these are programming languages commonly used for web development?",
+        correct: [
+            "JavaScript",
+            "TypeScript",
+            "Python",
+            "PHP",
+            "Ruby"
+        ],
+        wrong: [
+            "Microsoft Word",
+            "Photoshop",
+            "Excel",
+            "PowerPoint",
+            "Adobe Illustrator"
+        ]
+    },
+    {
+        qn: "Which of these are version control systems?",
+        correct: [
+            "Git",
+            "Mercurial",
+            "SVN",
+            "Perforce",
+            "CVS"
+        ],
+        wrong: [
+            "MySQL",
+            "MongoDB",
+            "Redis",
+            "PostgreSQL",
+            "SQLite"
+        ]
+    },
+    {
+        qn: "Which of these are JavaScript frameworks/libraries?",
+        correct: [
+            "React",
+            "Angular",
+            "Vue",
+            "Svelte",
+            "Ember"
+        ],
+        wrong: [
+            "Java",
+            "Python",
+            "C++",
+            "Ruby",
+            "Go"
+        ]
+    },
+    {
+        qn: "Which of these are cloud computing providers?",
+        correct: [
+            "Amazon AWS",
+            "Microsoft Azure",
+            "Google Cloud Platform",
+            "IBM Cloud",
+            "Oracle Cloud"
+        ],
+        wrong: [
+            "Facebook",
+            "Twitter",
+            "Instagram",
+            "TikTok",
+            "Snapchat"
+        ]
+    },
+    {
+        qn: "Which of these are NoSQL databases?",
+        correct: [
+            "MongoDB",
+            "Cassandra",
+            "CouchDB",
+            "Redis",
+            "Neo4j"
+        ],
+        wrong: [
+            "MySQL",
+            "PostgreSQL",
+            "Oracle",
+            "SQL Server",
+            "SQLite"
+        ]
+    },
+    {
+        qn: "Which of these are text editors or IDEs?",
+        correct: [
+            "Visual Studio Code",
+            "Sublime Text",
+            "Atom",
+            "PyCharm",
+            "Eclipse"
+        ],
+        wrong: [
+            "Chrome",
+            "Firefox",
+            "Safari",
+            "Edge",
+            "Opera"
+        ]
+    },
+    {
+        qn: "Which of these are operating systems?",
+        correct: [
+            "Windows",
+            "macOS",
+            "Linux",
+            "Ubuntu",
+            "Fedora"
+        ],
+        wrong: [
+            "Word",
+            "Excel",
+            "PowerPoint",
+            "Outlook",
+            "Access"
+        ]
+    },
+    {
+        qn: "Which of these are CSS preprocessors or styling solutions?",
+        correct: [
+            "SASS",
+            "LESS",
+            "Stylus",
+            "Tailwind CSS",
+            "Bootstrap"
+        ],
+        wrong: [
+            "React",
+            "Angular",
+            "Vue",
+            "Svelte",
+            "jQuery"
+        ]
+    },
+    {
+        qn: "Which of these are testing frameworks?",
+        correct: [
+            "Jest",
+            "Mocha",
+            "Jasmine",
+            "Cypress",
+            "Selenium"
+        ],
+        wrong: [
+            "React",
+            "Vue",
+            "Angular",
+            "Svelte",
+            "Ember"
+        ]
+    },
+    {
+        qn: "Which of these are popular Linux distributions?",
+        correct: [
+            "Ubuntu",
+            "Fedora",
+            "Debian",
+            "CentOS",
+            "Linux Mint"
+        ],
+        wrong: [
+            "Windows 10",
+            "macOS",
+            "iOS",
+            "Android",
+            "Chrome OS"
+        ]
+    }
+];
 
         let currentQuestion = 0;
         const quizContainer = document.querySelector('.quiz-container');
