@@ -18,6 +18,7 @@
             padding: 2rem;
             border-radius: 12px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
         .question {
@@ -90,9 +91,94 @@
             display: flex;
             justify-content: flex-end;
         }
+
+        /* Popup styles */
+        .popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            z-index: 1000;
+            visibility: hidden; /* Hide popup by default */
+            opacity: 0; /* Make it invisible */
+            transition: visibility 0s linear 0.3s, opacity 0.3s ease; /* Add transition */
+        }
+
+        .popup.show {
+            visibility: visible; /* Show when .show class is added */
+            opacity: 1;
+            animation: popIn 0.3s ease forwards;
+            transition-delay: 0s; /* Remove delay when showing */
+        }
+
+        .popup-content {
+            font-size: 1.5rem;
+            color: #dc3545;
+            margin-bottom: 1.5rem;
+        }
+
+        .popup-btn {
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        .popup-btn:hover {
+            background-color: #c82333;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden; /* Hide overlay by default */
+            pointer-events: none;
+            transition: visibility 0s linear 0.3s, opacity 0.3s ease;
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible; /* Show when .show class is added */
+            pointer-events: auto;
+            transition-delay: 0s; /* Remove delay when showing */
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="overlay"></div>
+    <div class="popup">
+        <div class="popup-content">
+            <p>❌ Incorrect Answer!</p>
+        </div>
+        <button class="popup-btn">Next Question</button>
+    </div>
+    
     <div class="quiz-container">
         <div class="progress"></div>
         <div class="question"></div>
@@ -283,6 +369,9 @@
         const optionsGrid = document.querySelector('.options-grid');
         const nextButton = document.querySelector('.next-btn');
         const progressElement = document.querySelector('.progress');
+        const popup = document.querySelector('.popup');
+        const overlay = document.querySelector('.overlay');
+        const popupBtn = document.querySelector('.popup-btn');
 
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -290,6 +379,23 @@
                 [array[i], array[j]] = [array[j], array[i]];
             }
             return array;
+        }
+
+        function showPopup() {
+            popup.classList.add('show');
+            overlay.classList.add('show');
+        }
+
+        function hidePopup() {
+            popup.classList.remove('show');
+            overlay.classList.remove('show');
+        }
+
+        function nextQuestion() {
+            hidePopup();
+            currentQuestion++;
+            displayQuestion();
+            window.scrollTo(0, 0);
         }
 
         function displayQuestion() {
@@ -301,28 +407,24 @@
             const question = quizData[currentQuestion];
             questionElement.textContent = question.qn;
             
-            // Combine and shuffle options
             const allOptions = [...question.wrong, ...question.correct];
             const shuffledOptions = shuffleArray([...allOptions]);
 
-            // Update progress
             progressElement.textContent = `Question ${currentQuestion + 1} of ${quizData.length}`;
 
-            // Clear previous options
             optionsGrid.innerHTML = '';
 
-            // Create option elements
             shuffledOptions.forEach(option => {
                 const optionElement = document.createElement('div');
                 optionElement.className = 'option';
                 optionElement.textContent = option;
                 
                 optionElement.addEventListener('click', () => {
-                    // Check if option is correct
                     if (question.correct.includes(option)) {
                         optionElement.classList.add('correct');
                     } else {
                         optionElement.classList.add('incorrect');
+                        showPopup();
                     }
                 });
 
@@ -330,11 +432,8 @@
             });
         }
 
-        nextButton.addEventListener('click', () => {
-            currentQuestion++;
-            displayQuestion();
-            window.scrollTo(0, 0);
-        });
+        nextButton.addEventListener('click', nextQuestion);
+        popupBtn.addEventListener('click', nextQuestion);
 
         // Initialize the quiz
         displayQuestion();
