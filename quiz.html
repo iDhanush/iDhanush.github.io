@@ -1,258 +1,392 @@
 <!DOCTYPE html>
 <html lang="en">
+<!-- Previous head content remains the same -->
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Quiz</title>
+    <title>Domain Quiz</title>
     <style>
-        body {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f0f2f5;
         }
 
-        .quiz-container {
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6e8efb, #a777e3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            font-size: calc(14px + 0.5vw);
+        }
+
+        .container {
             background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            padding: 5%;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 1200px;
+            min-height: 60vh;
             position: relative;
         }
 
-        .question {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            color: #1a1a1a;
+        .score-display {
+            position: absolute;
+            top: 2%;
+            right: 2%;
+            background: #f8f9fa;
+            padding: 1.5%;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            font-size: 1.2em;
+            color: #333;
+            display: none;
         }
 
-        .options-grid {
+        .score-number {
+            color: #2196F3;
+            font-weight: bold;
+        }
+
+        .domain-selection {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 1.5rem;
+            grid-template-columns: repeat(2, minmax(210px, 1fr));
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+
+        .domain-btn {
+            padding: 2% 3%;
+            border: none;
+            border-radius: 10px;
+            background: #f0f0f0;
+            cursor: pointer;
+            font-size: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .domain-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-2px);
+        }
+
+        .question-container {
+            display: none;
+        }
+
+        .question {
+            font-size: calc(1.4em + 0.5vw);
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
         }
 
         .option {
-            padding: 1rem;
-            border: 2px solid #e0e0e0;
-            border-radius: 8px;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
-            background: white;
+            text-align: center;
+            font-size: 1.1em;
         }
 
         .option:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-color: #6e8efb;
         }
 
-        .option.correct {
-            background-color: #d4edda;
-            border-color: #28a745;
-            color: #155724;
+        .option.selected {
+            background-color: #6e8efb;
+            color: white;
+            border-color: #6e8efb;
         }
 
-        .option.incorrect {
-            background-color: #f8d7da;
-            border-color: #dc3545;
-            color: #721c24;
+        .correct {
+            background-color: #4CAF50 !important;
+            color: white;
+            border-color: #4CAF50 !important;
         }
 
-        .next-btn {
-            background-color: #007bff;
+        .user-correct {
+            background-color: #21f33a !important;
+            color: white;
+            border-color: #2c0ce2 !important;
+            border-width: 4px !important;
+            box-shadow: 0 0 10px rgba(255, 193, 7, 0.5);
+        }
+
+        .wrong {
+            background-color: #f44336 !important;
+            color: white;
+            border-color: #f44336 !important;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 2%;
+            left: 2%;
+            padding: 10px 20px;
+            background: #6e8efb;
             color: white;
             border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s ease;
-        }
-
-        .next-btn:hover {
-            background-color: #0056b3;
-        }
-
-        .progress {
-            margin-bottom: 1rem;
-            font-size: 1.1rem;
-            color: #666;
-        }
-
-        .completed {
-            text-align: center;
-            font-size: 1.5rem;
-            color: #28a745;
-        }
-
-        .button-container {
-            display: flex;
-            justify-content: flex-end;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            opacity: 0;
-            visibility: hidden;
             transition: all 0.3s ease;
-            z-index: 999;
+            font-size: 1.2em;
         }
 
-        .overlay.show {
-            opacity: 1;
-            visibility: visible;
+        .back-btn:hover {
+            background: #5d7ce0;
         }
 
         .popup {
             position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0);
+            top: 90%;
+            right: 10%;
+            transform: translateY(-50%);
             background: white;
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            padding: 1%;
+            border-radius: 15px;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.2);
             text-align: center;
+            display: none;
             z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
+            width: 350px;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                right: -320px;
+                opacity: 0;
+            }
+
+            to {
+                right: 10%;
+                opacity: 1;
+            }
+        }
+
+        .popup h2 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 1.3em;
+        }
+
+        .popup button {
+            padding: 10px 20px;
+            background: #6e8efb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
             transition: all 0.3s ease;
+            font-size: 1.1em;
         }
 
-        .popup.show {
-            transform: translate(-50%, -50%) scale(1);
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .popup-content {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .popup-content.success {
-            color: #28a745;
-        }
-
-        .popup-content.error {
-            color: #dc3545;
-        }
-
-        .popup-btn.success {
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .popup-btn.error {
-            background-color: #dc3545;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 1rem;
-        }
-
-        .popup-btn.success:hover {
-            background-color: #218838;
-        }
-
-        .popup-btn.error:hover {
-            background-color: #c82333;
-        }
-
-        .quiz-container.dimmed {
-            pointer-events: none;
-            opacity: 0.7;
-        }
-
-        @keyframes popIn {
-            0% {
-                transform: translate(-50%, -50%) scale(0);
-            }
-            50% {
-                transform: translate(-50%, -50%) scale(1.2);
-            }
-            100% {
-                transform: translate(-50%, -50%) scale(1);
-            }
+        .popup button:hover {
+            background: #5d7ce0;
         }
     </style>
+
 </head>
+
 <body>
-    <div class="overlay"></div>
-    <div class="popup">
-        <div class="popup-content">
-            <p class="message"></p>
+    <div class="container">
+        <div id="domainSelection" class="domain-selection">
+            <h2 style="grid-column: 1/-1; text-align: center; margin-bottom: 20px;">Select a Domain</h2>
         </div>
-        <button class="popup-btn">Next Question</button>
+
+        <div id="questionContainer" class="question-container">
+            <button id="backBtn" class="back-btn">← Back to Domains</button>
+            <div id="scoreDisplay" class="score-display">
+                Score: <span id="currentScore" class="score-number">0</span>/<span id="totalRequired"
+                    class="score-number">0</span>
+            </div>
+            <div id="question" class="question"></div>
+            <div id="options" class="options"></div>
+        </div>
     </div>
-    
-    <div class="quiz-container">
-        <div class="progress"></div>
-        <div class="question"></div>
-        <div class="options-grid"></div>
-        <div class="button-container">
-            <button class="next-btn">Next Question</button>
-        </div>
+
+    <div id="popup" class="popup">
+        <h2 id="popupMessage"></h2>
+        <button onclick="goToDomains()">Choose Another Domain</button>
     </div>
 
     <script>
-        const quizData =[
-{
-"qn": "Which of the following are Search Engines?",
-"wrong": ["CHROME", "SAFARI", "EDGE", "TOR", "FIREFOX", "OPERA", "BRAVE"],
-"correct": ["GOOGLE", "BING", "BAIDU", "DUCKDUCKGO", "YAHOO"]
-},
-{
-"qn": "IDENTIFY AI RELATED TECHNOLOGIES TOOLS OR CONCEPTS",
-"wrong": ["KUBERNETES", "POWER BI", "JSON", "PYCHARM", "GITHUB", "WORDPRESS"],
-"correct": ["CHATGPT", "DEEP MIND", "DALL-E", "IBM WATSON", "TENSORFLOW", "INTELIGENSIA"]
-},
-{
-"qn": "IDENTIFY FOUNDERS OF FAMOUS TECH COMPANIES IN INDIA",
-"wrong": ["ASHA UNNIKRISHNAN", "JUSTIN SINGH", "GAUTAM ADANI", "H L BHATIA", "RATAN TATA", "MUKESH AMBANI"],
-"correct": ["SACHIN BANSAL", "VIJAY SHEKAR SHARMA", "DEEPINDER GOYAL", "VSS MANI", "RICHA KAR", "N R NARAYANA MURTHY"]
-},
-{
-"qn": "IDENTIFY SOFTWARE THAT IS OPEN-SOURCE",
-"wrong": ["CANVA", "PHOTOSHOP", "WINDOWS", "INDESIGN", "MS OFFICE", "ADOBE PREMIERE"],
-"correct": ["LIBRE OFFICE", "MOZILLA FIREFOX", "GIMP", "LINUX", "WORDPRESS", "PYTHON"]
-},
-{
-"qn": "IDENTIFY WELL KNOWN CRYPTOCURRENCIES",
-"wrong": ["BINOMO", "ENVICOIN", "COINBASE", "RAZORPAY", "COMICON", "PAYPAL", "STRIPE"],
-"correct": ["ETHEREUM", "RIPPLE", "DOGECOIN", "LITECOIN", "BITCOIN"]
-},
-{
-"qn": "IDENTIFY PROGRAMMING LANGUAGES",
-"wrong": ["CSS", "MYSQL", "HTML", "GIT", "EXCEL", "TABLEAU", "SELENIUM"],
-"correct": ["RUBY", "JAVA", "COBOL", "R", "C++"]
-}
-]
+        // Previous quiz data remains the same
+        const quizData = [
+            {
+                "qn": "Which of the following are Search Engines?",
+                "wrong": ["CHROME", "SAFARI", "EDGE", "TOR", "FIREFOX", "OPERA", "BRAVE"],
+                "correct": ["GOOGLE", "BING", "BAIDU", "DUCKDUCKGO", "YAHOO"],
+                "domain": "SEARCH ENGINE"
+            },
+            {
+                "qn": "IDENTIFY AI RELATED TECHNOLOGIES TOOLS OR CONCEPTS",
+                "wrong": ["KUBERNETES", "POWER BI", "JSON", "PYCHARM", "GITHUB", "WORDPRESS", "INTELIGENSIA"],
+                "correct": ["CHATGPT", "DEEP MIND", "DALL-E", "IBM WATSON", "TENSORFLOW"],
+                "domain": "AI TECHNOLOGIES"
+            },
+            {
+                "qn": "IDENTIFY FOUNDERS OF FAMOUS TECH COMPANIES IN INDIA",
+                "wrong": ["ASHA UNNIKRISHNAN", "JUSTIN SINGH", "GAUTAM ADANI", "H L BHATIA", "RATAN TATA", "MUKESH AMBANI", "VIKRAM SHARMA"],
+                "correct": ["SACHIN BANSAL", "VIJAY SHEKAR SHARMA", "DEEPINDER GOYAL", "VSS MANI", "RICHA KAR"],
+                "domain": "TECH FOUNDERS"
+            },
+            {
+                "qn": "IDENTIFY SOFTWARE THAT IS OPEN-SOURCE",
+                "wrong": ["CANVA", "PHOTOSHOP", "WINDOWS", "INDESIGN", "MS OFFICE", "ADOBE PREMIERE", "FINAL CUT PRO"],
+                "correct": ["LIBRE OFFICE", "MOZILLA FIREFOX", "GIMP", "LINUX", "WORDPRESS"],
+                "domain": "OPEN-SOURCE SOFTWARE"
+            },
+            {
+                "qn": "IDENTIFY WELL KNOWN CRYPTOCURRENCIES",
+                "wrong": ["BINOMO", "ENVICOIN", "COINBASE", "RAZORPAY", "COMICON", "PAYPAL", "STRIPE"],
+                "correct": ["ETHEREUM", "RIPPLE", "DOGECOIN", "LITECOIN", "BITCOIN"],
+                "domain": "CRYPTOCURRENCY"
+            },
+            {
+                "qn": "IDENTIFY PROGRAMMING LANGUAGES",
+                "wrong": ["CSS", "MYSQL", "HTML", "GIT", "EXCEL", "TABLEAU", "SELENIUM"],
+                "correct": ["RUBY", "JAVA", "COBOL", "R", "C++"],
+                "domain": "PROGRAMMING LANGUAGE"
+            }
+        ];
 
-        let currentQuestion = 0;
-        let selectedAnswers = new Set();
-        const quizContainer = document.querySelector('.quiz-container');
-        const questionElement = document.querySelector('.question');
-        const optionsGrid = document.querySelector('.options-grid');
-        const nextButton = document.querySelector('.next-btn');
-        const progressElement = document.querySelector('.progress');
-        const popup = document.querySelector('.popup');
-        const overlay = document.querySelector('.overlay');
-        const popupBtn = popup.querySelector('.popup-btn');
+
+        let selectedOptions = new Set();
+        let currentQuestion = null;
+
+        // Get DOM elements
+        const domainSelection = document.getElementById('domainSelection');
+        const questionContainer = document.getElementById('questionContainer');
+        const questionElement = document.getElementById('question');
+        const optionsContainer = document.getElementById('options');
+        const backButton = document.getElementById('backBtn');
+        const popup = document.getElementById('popup');
+        const popupMessage = document.getElementById('popupMessage');
+        const scoreDisplay = document.getElementById('scoreDisplay');
+        const currentScoreElement = document.getElementById('currentScore');
+        const totalRequiredElement = document.getElementById('totalRequired');
+
+        // Get unique domains
+        const domains = [...new Set(quizData.map(q => q.domain))];
+
+        // Create domain buttons
+        domains.forEach(domain => {
+            const button = document.createElement('button');
+            button.className = 'domain-btn';
+            button.textContent = domain;
+            button.addEventListener('click', () => startQuiz(domain));
+            domainSelection.appendChild(button);
+        });
+
+        function startQuiz(domain) {
+            selectedOptions.clear();
+            currentQuestion = quizData.find(q => q.domain === domain);
+            domainSelection.style.display = 'none';
+            questionContainer.style.display = 'block';
+            scoreDisplay.style.display = 'block';
+            updateScore(0);
+            showQuestion();
+        }
+
+        function updateScore(correct) {
+            currentScoreElement.textContent = correct * 2;
+            totalRequiredElement.textContent = currentQuestion.correct.length  * 2;
+        }
+
+        function showQuestion() {
+            if (!currentQuestion) return;
+
+            questionElement.textContent = currentQuestion.qn;
+            optionsContainer.innerHTML = '';
+
+            // Combine and shuffle options
+            const allOptions = [...currentQuestion.correct, ...currentQuestion.wrong];
+            const shuffledOptions = shuffleArray(allOptions);
+
+            shuffledOptions.forEach(option => {
+                const button = document.createElement('div');
+                button.className = 'option';
+                button.textContent = option;
+                button.addEventListener('click', () => selectOption(button, option));
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function selectOption(button, option) {
+            if (currentQuestion.wrong.includes(option)) {
+                // Highlight the selected wrong answer
+                button.classList.add('wrong');
+
+                // Highlight all correct answers
+                const options = document.querySelectorAll('.option');
+                options.forEach(opt => {
+                    if (currentQuestion.correct.includes(opt.textContent)) {
+                        opt.classList.add('correct');
+                    } else if (currentQuestion.wrong.includes(opt.textContent)) {
+                        if (!opt.classList.contains('wrong')) {
+                            opt.classList.add('wrong');
+                        }
+                    }
+                });
+
+                // Show a popup after a delay
+                setTimeout(() => showPopup('Game Over! Try Again!'), 1000);
+                return;
+            }
+
+            button.classList.toggle('selected');
+
+            if (selectedOptions.has(option)) {
+                selectedOptions.delete(option);
+                button.classList.remove('user-correct');
+            } else {
+                selectedOptions.add(option);
+                if (currentQuestion.correct.includes(option)) {
+                    button.classList.add('user-correct');
+                }
+            }
+
+            // Update score
+            const correctSelections = [...selectedOptions].filter(opt =>
+                currentQuestion.correct.includes(opt)).length;
+            updateScore(correctSelections);
+
+            // Check if all correct answers are selected
+            if (selectedOptions.size === currentQuestion.correct.length &&
+                [...selectedOptions].every(opt => currentQuestion.correct.includes(opt))) {
+                setTimeout(() => showPopup('Congratulations! You Won!'), 500);
+            }
+        }
+
+        function showPopup(message) {
+            popupMessage.textContent = message;
+            popup.style.display = 'block';
+        }
+
+        function goToDomains() {
+            popup.style.display = 'none';
+            questionContainer.style.display = 'none';
+            scoreDisplay.style.display = 'none';
+            domainSelection.style.display = 'grid';
+            selectedOptions.clear();
+        }
+
+        backButton.addEventListener('click', goToDomains);
 
         function shuffleArray(array) {
             for (let i = array.length - 1; i > 0; i--) {
@@ -261,92 +395,7 @@
             }
             return array;
         }
-
-        function showPopup(type, message) {
-            const popupContent = popup.querySelector('.popup-content');
-            const popupBtn = popup.querySelector('.popup-btn');
-            
-            // Reset classes
-            popupContent.classList.remove('error', 'success');
-            popupBtn.classList.remove('error', 'success');
-            
-            // Add new classes
-            popupContent.classList.add(type);
-            popupBtn.classList.add(type);
-            
-            // Set message
-            popup.querySelector('.message').textContent = message;
-            
-            // Show popup and overlay
-            popup.classList.add('show');
-            overlay.classList.add('show');
-            quizContainer.classList.add('dimmed');
-        }
-
-        function hidePopup() {
-            popup.classList.remove('show');
-            overlay.classList.remove('show');
-            quizContainer.classList.remove('dimmed');
-        }
-
-        function checkAllCorrectAnswers() {
-            const question = quizData[currentQuestion];
-            const selectedCorrectAnswers = Array.from(selectedAnswers)
-                .filter(answer => question.correct.includes(answer));
-            return selectedCorrectAnswers.length === question.correct.length;
-        }
-
-        function displayQuestion() {
-            if (currentQuestion >= quizData.length) {
-                quizContainer.innerHTML = '<div class="completed">Quiz Completed! 🎉</div>';
-                return;
-            }
-
-            selectedAnswers.clear();
-            const question = quizData[currentQuestion];
-            questionElement.textContent = question.qn;
-            
-            const allOptions = [...question.wrong, ...question.correct];
-            const shuffledOptions = shuffleArray([...allOptions]);
-
-            progressElement.textContent = `Question ${currentQuestion + 1} of ${quizData.length}`;
-            optionsGrid.innerHTML = '';
-
-            shuffledOptions.forEach(option => {
-                const optionElement = document.createElement('div');
-                optionElement.className = 'option';
-                optionElement.textContent = option;
-                
-                optionElement.addEventListener('click', () => {
-                    if (question.correct.includes(option)) {
-                        optionElement.classList.add('correct');
-                        selectedAnswers.add(option);
-                        
-                        if (checkAllCorrectAnswers()) {
-                            showPopup('success', '🎉 Well Done! All answers are correct!');
-                        }
-                    } else {
-                        optionElement.classList.add('incorrect');
-                        showPopup('error', '❌ Incorrect Answer!');
-                    }
-                });
-
-                optionsGrid.appendChild(optionElement);
-            });
-        }
-
-        function nextQuestion() {
-            hidePopup();
-            currentQuestion++;
-            displayQuestion();
-            window.scrollTo(0, 0);
-        }
-
-        nextButton.addEventListener('click', nextQuestion);
-        popupBtn.addEventListener('click', nextQuestion);
-
-        // Initialize the quiz
-        displayQuestion();
     </script>
 </body>
+
 </html>
