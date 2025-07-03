@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Detect Telegram In-App Browser</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f9f9f9;
+    }
+    .result {
+      margin-top: 30px;
+      font-size: 1.3em;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      max-width: 500px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Telegram In-App Browser Detection Demo</h2>
+  <div class="result" id="result">Detecting...</div>
+  <script>
+    function detectTelegramInAppBrowser() {
+      var userAgent = navigator.userAgent || '';
+      var result = '';
+
+      // Detect Telegram in-app browser for Android
+      if (userAgent.includes("Android") && typeof window.TelegramWebview !== 'undefined') {
+        result = '✅ Opened inside Telegram In-App Browser (Android)';
+      }
+      // Detect Telegram in-app browser for iOS
+      else if (userAgent.includes("iPhone") && typeof window.TelegramWebviewProxy !== 'undefined' && typeof window.TelegramWebviewProxyProto !== 'undefined') {
+        result = '✅ Opened inside Telegram In-App Browser (iOS)';
+      }
+      // Detect Telegram Webview (generic)
+      else if (typeof window.TelegramWebview !== 'undefined' || typeof window.TelegramWebviewProxy !== 'undefined') {
+        result = '✅ Opened inside Telegram In-App Browser (unknown platform)';
+      }
+      // Detect Chrome
+      else if (/Chrome/i.test(userAgent) && !/Edge|OPR/i.test(userAgent)) {
+        result = '🌐 Opened in Google Chrome';
+      }
+      // Detect Safari
+      else if (/Safari/i.test(userAgent) && !/Chrome|Edge|OPR/i.test(userAgent)) {
+        result = '🌐 Opened in Safari';
+      }
+      else {
+        result = '❌ Not opened in Telegram In-App Browser';
+      }
+
+      // Show result in alert and in HTML
+      alert(result);
+      document.getElementById('result').textContent = result;
+    }
+
+    // Run detection on page load
+    detectTelegramInAppBrowser();
+  </script>
+</body>
+</html>
