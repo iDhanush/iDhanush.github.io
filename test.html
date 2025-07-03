@@ -25,43 +25,48 @@
   <h2>Telegram In-App Browser Detection Demo</h2>
   <div class="result" id="result">Detecting...</div>
   <script>
-    function detectTelegramInAppBrowser() {
-      var userAgent = navigator.userAgent || '';
-      var result = '';
+  function detectTelegramInAppBrowser() {
+    var userAgent = navigator.userAgent || '';
+    var result = '';
+    var isTelegram = false;
 
-      // Detect Telegram in-app browser for Android
-      if (userAgent.includes("Android") && typeof window.TelegramWebview !== 'undefined') {
-        result = '✅ Opened inside Telegram In-App Browser (Android)';
-      }
-      // Detect Telegram in-app browser for iOS
-      else if (userAgent.includes("iPhone") && typeof window.TelegramWebviewProxy !== 'undefined' && typeof window.TelegramWebviewProxyProto !== 'undefined') {
-        result = '✅ Opened inside Telegram In-App Browser (iOS)';
-      }
-      // Detect Telegram Webview (generic)
-      else if (typeof window.TelegramWebview !== 'undefined' || typeof window.TelegramWebviewProxy !== 'undefined') {
-        result = '✅ Opened inside Telegram In-App Browser (unknown platform)';
-      }
-      // Detect Chrome
-      else if (/Chrome/i.test(userAgent) && !/Edge|OPR/i.test(userAgent)) {
-        result = '🌐 Opened in Google Chrome';
-      }
-      // Detect Safari
-      else if (/Safari/i.test(userAgent) && !/Chrome|Edge|OPR/i.test(userAgent)) {
-        result = '🌐 Opened in Safari';
-      }
-      else {
-        result = '❌ Not opened in Telegram In-App Browser';
-      }
-
-      // Show result in alert and in HTML
-      // alert(result);
-      
-      document.getElementById('result').textContent = result;
-      window.open('https://google.com', '_blank')
+    // Detect Telegram in-app browser (Android)
+    if (userAgent.includes("Android") && typeof window.TelegramWebview !== 'undefined') {
+      result = '✅ Opened inside Telegram In-App Browser (Android)';
+      isTelegram = true;
+    }
+    // Detect Telegram in-app browser (iOS)
+    else if (userAgent.includes("iPhone") && typeof window.TelegramWebviewProxy !== 'undefined' && typeof window.TelegramWebviewProxyProto !== 'undefined') {
+      result = '✅ Opened inside Telegram In-App Browser (iOS)';
+      isTelegram = true;
+    }
+    // Detect Telegram Webview (generic)
+    else if (typeof window.TelegramWebview !== 'undefined' || typeof window.TelegramWebviewProxy !== 'undefined') {
+      result = '✅ Opened inside Telegram In-App Browser (unknown platform)';
+      isTelegram = true;
+    }
+    // Chrome or Safari fallback
+    else if (/Chrome/i.test(userAgent) && !/Edge|OPR/i.test(userAgent)) {
+      result = '🌐 Opened in Google Chrome';
+    } else if (/Safari/i.test(userAgent) && !/Chrome|Edge|OPR/i.test(userAgent)) {
+      result = '🌐 Opened in Safari';
+    } else {
+      result = '❌ Not opened in Telegram In-App Browser';
     }
 
-    // Run detection on page load
-    detectTelegramInAppBrowser();
-  </script>
+    document.getElementById('result').textContent = result;
+
+    // If inside Telegram on Android, try to open the same URL in Chrome using intent
+    if (isTelegram && userAgent.includes("Android")) {
+      var currentUrl = window.location.href;
+      var encodedUrl = currentUrl.replace(/^https?:\/\//, ''); // remove scheme
+      var intentUrl = `intent://${encodedUrl}#Intent;package=com.android.chrome;scheme=https;end`;
+      window.location.href = intentUrl;
+    }
+  }
+
+  detectTelegramInAppBrowser();
+</script>
+
 </body>
 </html>
