@@ -452,7 +452,8 @@ body {
     }
 
     .greeting .animation {
-        font-size: 15px;
+        font-size: 10px;
+         margin-left: .5rem;
     }
 
     .background-img {
