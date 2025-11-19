@@ -445,7 +445,7 @@ body {
         height: 10%;
     }
 }
-@media(max-width:250px) {
+@media(max-width:300px) {
     .greeting {
         margin-left: 3px;
         font-size: 10px;
