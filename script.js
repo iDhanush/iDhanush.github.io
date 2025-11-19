@@ -30,25 +30,25 @@ svgList = {
 var myWorks = [
     
     {
-        title: "BlockChio - No Code Agentic AI Builder",
+        title: "BlockChio",
         content: "A visual no-code platform to build multi-agent AI workflows with autonomous reasoning and tool execution. Winner of Best Project (Sponsored Track) at BNB Hack Kerala.",
         source: "https://github.com/iDhanush/BlockChio_BNB_HACK_2025",
         icon: ""
     },
     {
-        title: "ProductGPT - AI Shopping Assistant",
+        title: "ProductGPT",
         content: "India's first agentic AI shopping assistant using LangChain/LangFlow. Handles autonomous product research, web navigation, and extraction with 90% reduced bandwidth usage.",
         source: "https://productgpt.in",
         icon: ""
     },
     {
-        title: "AbroadGPT - AI Agent for Study Abroad",
+        title: "AbroadGPT",
         content: "An AI-powered assistant for study-abroad agencies with personality-based recommendations and AI-generated university & country info cards.",
         source: "https://abroadbot.vercel.app/",
         icon: ""
     },
     {
-        title: "Eventzo - Event Management Platform",
+        title: "Eventzo",
         content: "A scalable event management system with real-time ticketing, optimized for 10,000+ concurrent users and 99.9% uptime.",
         source: "https://eventzo.vercel.app",
         icon: ""
