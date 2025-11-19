@@ -445,4 +445,18 @@ body {
         height: 10%;
     }
 }
+@media(max-width:250px) {
+    .greeting {
+        margin-left: 3px;
+        font-size: 10px;
+    }
 
+    .greeting .animation {
+        font-size: 15px;
+    }
+
+    .background-img {
+        width: 120%;
+        height: 10%;
+    }
+}
