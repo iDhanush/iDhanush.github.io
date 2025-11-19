@@ -28,32 +28,57 @@ svgList = {
 }
 
 var myWorks = [
+    
+    {
+        title: "BlockChio - No Code Agentic AI Builder",
+        content: "A visual no-code platform to build multi-agent AI workflows with autonomous reasoning and tool execution. Winner of Best Project (Sponsored Track) at BNB Hack Kerala.",
+        source: "https://github.com/iDhanush/BlockChio_BNB_HACK_2025",
+        icon: ""
+    },
+    {
+        title: "ProductGPT - AI Shopping Assistant",
+        content: "India's first agentic AI shopping assistant using LangChain/LangFlow. Handles autonomous product research, web navigation, and extraction with 90% reduced bandwidth usage.",
+        source: "https://productgpt.in",
+        icon: ""
+    },
+    {
+        title: "AbroadGPT - AI Agent for Study Abroad",
+        content: "An AI-powered assistant for study-abroad agencies with personality-based recommendations and AI-generated university & country info cards.",
+        source: "https://abroadbot.vercel.app/",
+        icon: ""
+    },
+    {
+        title: "Eventzo - Event Management Platform",
+        content: "A scalable event management system with real-time ticketing, optimized for 10,000+ concurrent users and 99.9% uptime.",
+        source: "https://eventzo.vercel.app",
+        icon: ""
+    },
     {
         title: "Placify App",
-        content: "A mobile app designed to simplify college placements, providing personalized feeds, real-time job notifications, and updates to enhance the placement process for students.",
-        source: "https://www.linkedin.com/posts/idhanush_placements-backenddeveloper-techforgood-activity-7277985605483905027-lKnB?utm_source=share&utm_medium=member_desktop",
+        content: "A mobile app built to streamline college placements with personalized feeds, real-time job notifications, and seamless student–faculty communication.",
+        source: "https://www.linkedin.com/posts/idhanush_placements-backenddeveloper-techforgood-activity-7277985605483905027-lKnB",
         icon: "assets/placifylogo.svg"
     },
     {
         title: "IoT Robo V1",
-        content: "An IoT-enabled animatronic greeting robot funded by IEDC SJC Devagiri, designed to interact with users through greetings and dynamic facial expressions.",
+        content: "An IoT-enabled animatronic greeting robot funded by IEDC SJC Devagiri, featuring dynamic facial expressions, greeting interactions, and motion-controlled hands.",
         source: "https://github.com/iDhanush/IoT_Animatronics_Robot_V1.git",
         icon: ""
     },
     {
         title: "BGM4RealLife",
-        content: "A fun project that adds cinematic background music to everyday moments and was featured in the top 10 \"Useless Projects\" for its creativity.",
+        content: "A fun project that plays cinematic background music for real-life moments. Featured in the Top 10 'Useless Projects' for its creativity.",
         source: "https://bgm4reallife.vercel.app/",
         icon: ""
     },
     {
         title: "LinkTools.in",
-        content: "A web app for managing URLs with shortening, custom aliases, QR codes, analytics, and paywalled links. Perfect for personal and business use!",
+        content: "A URL management platform offering link shortening, QR codes, analytics, and paywalled links—built for both personal and business use.",
         source: "https://linktools.pages.dev/",
         icon: ""
     },
+];
 
-]
 
 function createDiv(className) {
     var div = document.createElement("div")
