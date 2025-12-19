@@ -28,16 +28,21 @@ svgList = {
 }
 
 var myWorks = [
-
+    {
+        title: "RapidStore",
+        content: "A multi-tenant e-commerce SaaS platform that lets businesses launch and manage scalable online stores from a single system.",
+        source: "https://rapidstore.app",
+        icon: ""
+    },
     {
         title: "BlockChio",
-        content: "A visual no-code platform to build multi-agent AI workflows with autonomous reasoning and tool execution. Winner of Best Project (Sponsored Track) at BNB Hack Kerala.",
+        content: "A no-code platform for building multi-agent AI workflows with autonomous reasoning. Winner of Best Project (Sponsored Track) at BNB Hack Kerala.",
         source: "https://github.com/iDhanush/BlockChio_BNB_HACK_2025",
         icon: ""
     },
     {
         title: "ProductGPT",
-        content: "India's first agentic AI shopping assistant using LangChain/LangFlow. Handles autonomous product research, web navigation, and extraction with 90% reduced bandwidth usage.",
+        content: "An agentic AI shopping assistant that autonomously researches products and extracts data with 90% lower bandwidth usage.",
         source: "https://productgpt.in",
         icon: ""
     },
@@ -61,7 +66,7 @@ var myWorks = [
     },
     {
         title: "IoT Robo V1",
-        content: "An IoT-enabled animatronic greeting robot funded by IEDC SJC Devagiri, featuring dynamic facial expressions, greeting interactions, and motion-controlled hands.",
+        content: "An IoT-enabled animatronic greeting robot with dynamic facial expressions, interactive greetings, and motion-controlled hands.",
         source: "https://github.com/iDhanush/IoT_Animatronics_Robot_V1.git",
         icon: ""
     },
