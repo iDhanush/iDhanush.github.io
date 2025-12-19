@@ -1,13 +1,13 @@
 window.addEventListener('scroll', function () {
     var fixme = document.querySelector('.con-con');
-    var fixmeTop = 115
+    var fixmeTop = 120
     var currentScroll = window.pageYOffset || document.documentElement.scrollTop;
     console.log(currentScroll, fixme.scrollTop)
     if (currentScroll >= fixmeTop) {
         fixme.style.position = 'fixed';
         fixme.style.right = '0';
         fixme.style.top = "0"
-        fixme.style.marginTop = "30px";
+        fixme.style.marginTop = "50px";
         fixme.style.padding
     } else {
         fixme.style.position = '';
@@ -28,7 +28,7 @@ svgList = {
 }
 
 var myWorks = [
-    
+
     {
         title: "BlockChio",
         content: "A visual no-code platform to build multi-agent AI workflows with autonomous reasoning and tool execution. Winner of Best Project (Sponsored Track) at BNB Hack Kerala.",
@@ -109,7 +109,7 @@ async function test() {
         readmore.appendChild(readMoreImg)
         title.innerHTML = myWorks[i]['title']
         title.appendChild(readmore)
-        
+
         content.innerHTML = myWorks[i]["content"]
         contents.appendChild(title)
         contents.appendChild(content)
